@@ -8,12 +8,17 @@ if (args.length === 0) {
 
 const handle = async () => {
   const url = args[0];
+  const password = args[1];
   console.log("Lavalink URL: " + url);
   console.log("Generating poToken and visitorData...");
   const generated = await generate();
 
   const res = await fetch(url + "/youtube", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: password,
+    },
     body: JSON.stringify(generated),
   }).catch((err) => {
     console.error("An error occurred while sending the request");
