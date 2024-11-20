@@ -8,6 +8,7 @@ if (args.length === 0) {
 
 const handle = async () => {
   const url = args[0];
+  console.log("Lavalink URL: " + url);
   console.log("Generating poToken and visitorData...");
   const generated = await generate();
 
@@ -19,6 +20,8 @@ const handle = async () => {
     console.error(err);
     process.exit(1);
   });
+
+  console.log("Response status code: " + res.status);
 
   const data = await res.json();
   console.log(data);
