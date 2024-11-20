@@ -27,9 +27,6 @@ const handle = async () => {
   });
 
   console.log("Response status code: " + res.status);
-
-  const data = await res.json();
-  console.log(data);
 };
 
 handle();
