@@ -1,5 +1,25 @@
-const { generate } = require("youtube-po-token-generator");
+const { exec } = require("child_process");
 const args = process.argv.slice(2);
+
+const generate = async () => {
+  return new Promise((resolve, reject) => {
+    exec(
+      "docker run quay.io/invidious/youtube-trusted-session-generator",
+      (error, stdout, stderr) => {
+        if (error) {
+          console.error(
+            "An error occurred while generating poToken and visitorData"
+          );
+          console.error(stderr);
+          reject(error);
+        }
+        const visitorData = stdout.match(/visitor_data: (.*)/)[1];
+        const poToken = stdout.match(/po_token: (.*)/)[1];
+        resolve({ visitorData, poToken });
+      }
+    );
+  });
+};
 
 if (args.length === 0) {
   console.error("Please provide a lavalink url");
