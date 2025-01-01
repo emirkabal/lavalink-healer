@@ -32,6 +32,9 @@ const handle = async () => {
   console.log("Lavalink URL: " + url);
   console.log("Generating poToken and visitorData...");
   const generated = await generate();
+  console.log("Generated poToken and visitorData");
+  console.log(`po_token: ${generated.poToken}`);
+  console.log(`visitor_data: ${generated.visitorData}`);
 
   const res = await fetch(url + "/youtube", {
     method: "POST",
